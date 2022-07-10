@@ -7,17 +7,22 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.haehome.App
 import com.haehome.PowerConnectionReceiver
 import com.haehome.data.model.WeatherInfo
 import com.haehome.ui.composable.BatteryLevel
+import com.haehome.ui.viewModel.MainViewModel
 
 @Composable
-fun HomeScreen(batteryLevel : Float, navigateToAppDrawer : () -> Unit) {
+fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToAppDrawer : () -> Unit) {
+    val state by mainViewModel.weatherState.collectAsState()
     HomeBackground {
         Column {
             Box(modifier = Modifier
@@ -30,7 +35,27 @@ fun HomeScreen(batteryLevel : Float, navigateToAppDrawer : () -> Unit) {
                         Spacer(modifier = Modifier.width(32.dp))
                         Clock()
                     }
-                    WeatherWidget(WeatherInfo(city = "Beinjing", country = "China", temp = 30.0, description = "Hot and cool weather"))
+                    Spacer(modifier = Modifier.height(32.dp))
+                    when(state){
+                        is MainViewModel.WeatherState.Failure -> {
+                            ErrorView((state as MainViewModel.WeatherState.Failure).message) {
+                                mainViewModel.getWeatherDetails()
+                            }
+                        }
+                        MainViewModel.WeatherState.Loading -> {
+                            DarkBackgroundCard {
+                                CircularProgressIndicator()
+                            }
+                        }
+                        is MainViewModel.WeatherState.Success -> {
+                            WeatherWidget((state as MainViewModel.WeatherState.Success).data) {
+                                mainViewModel.getWeatherDetails()
+                            }
+                        }
+                        null -> {
+
+                        }
+                    }
                 }
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
