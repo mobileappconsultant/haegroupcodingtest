@@ -8,5 +8,6 @@ import com.haehome.data.repository.WeatherRepositoryImpl
 class AppContainer {
     private val apiConnection : APIConnection = APIConnectionImpl()
     private val weatherRepository :WeatherRepository = WeatherRepositoryImpl(api = apiConnection)
-    val viewModelFactory = MainViewModelFactory(weatherRepository)
+    private val dispatcherProvider = DispatcherProviderImpl()
+    val viewModelFactory = MainViewModelFactory(weatherRepository, dispatcherProvider)
 }

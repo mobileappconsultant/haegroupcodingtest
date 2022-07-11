@@ -34,12 +34,15 @@ class APIConnectionImpl : APIConnection {
             val url: URL = URL(httpUrl)
             httpConn = url.openConnection() as HttpURLConnection
             httpConn.requestMethod = "GET";
+            Log.v(TAG, "Performing GET request: $httpUrl")
             val inputStream: InputStream = httpConn.inputStream
             inputStreamReader = InputStreamReader(inputStream)
             bufferedReader = BufferedReader(inputStreamReader)
             var line: String? = bufferedReader.readLine()
             while(line != null)
             {
+                Log.v(TAG, line)
+
                 // Append the text to string buffer.
                 readTextBuf.append(line);
                 // Continue to read text line.
