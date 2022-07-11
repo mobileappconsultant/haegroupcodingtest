@@ -21,8 +21,8 @@ fun Clock() {
     }
     LaunchedEffect(Unit){
         while (true) {
-            delay(1000)
             currentTime = getCurrentTime()
+            delay(1000)
         }
     }
 

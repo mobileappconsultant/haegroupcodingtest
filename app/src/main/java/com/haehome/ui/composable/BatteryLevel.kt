@@ -47,7 +47,7 @@ fun BatteryLevel(batteryLevel: Float) {
                 }
 
                 Text(
-                    text = "${batteryLevel}%",
+                    text = "${batteryLevel.toInt()}%",
                     color = Color.White,
                     fontSize = 32.sp,
                     modifier = Modifier.offset(y = -24.dp)

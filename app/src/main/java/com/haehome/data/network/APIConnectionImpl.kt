@@ -16,8 +16,8 @@ import kotlin.coroutines.suspendCoroutine
 
 private const val TAG = "HttpNetworkConnection"
 
-class HttpConnection {
-    suspend fun performHttpConnection(httpUrl : String) = suspendCoroutine<NetworkResult<WeatherInfo>> {
+class APIConnectionImpl : APIConnection {
+    override suspend fun getWeatherDetails(httpUrl : String) = suspendCoroutine<NetworkResult<WeatherInfo>> {
         val readTextBuf = StringBuffer()
 
         // Maintain http url connection.

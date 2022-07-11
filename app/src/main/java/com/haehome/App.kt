@@ -6,21 +6,18 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import com.haehome.data.network.HttpConnection
-import com.haehome.data.network.NetworkResult
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
+import com.haehome.di.AppContainer
 
 class App : Application() {
 
     companion object {
         var batteryPercent by mutableStateOf<Float?>(0f)
     }
+
+    val appContainer = AppContainer()
 
     override fun onCreate() {
         super.onCreate()
