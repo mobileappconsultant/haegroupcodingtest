@@ -2,7 +2,6 @@ package com.haehome.data.repository
 
 import com.haehome.data.model.WeatherInfo
 import com.haehome.data.network.APIConnection
-import com.haehome.data.network.APIConnectionImpl
 import com.haehome.data.network.NetworkResult
 import com.haehome.utils.Constants
 

@@ -17,7 +17,7 @@ import kotlin.coroutines.suspendCoroutine
 private const val TAG = "HttpNetworkConnection"
 
 class APIConnectionImpl : APIConnection {
-    override suspend fun getWeatherDetails(httpUrl : String) = suspendCoroutine<NetworkResult<WeatherInfo>> {
+    override suspend fun getWeatherDetails(httpUrl: String) = suspendCoroutine<NetworkResult<WeatherInfo>> {
         val readTextBuf = StringBuffer()
 
         // Maintain http url connection.
@@ -29,28 +29,26 @@ class APIConnectionImpl : APIConnection {
         // Read text into buffer.
         var bufferedReader: BufferedReader? = null
 
-
         try {
             val url: URL = URL(httpUrl)
             httpConn = url.openConnection() as HttpURLConnection
-            httpConn.requestMethod = "GET";
+            httpConn.requestMethod = "GET"
             Log.v(TAG, "Performing GET request: $httpUrl")
             val inputStream: InputStream = httpConn.inputStream
             inputStreamReader = InputStreamReader(inputStream)
             bufferedReader = BufferedReader(inputStreamReader)
             var line: String? = bufferedReader.readLine()
-            while(line != null)
-            {
+            while (line != null) {
                 Log.v(TAG, line)
 
                 // Append the text to string buffer.
-                readTextBuf.append(line);
+                readTextBuf.append(line)
                 // Continue to read text line.
-                line = bufferedReader.readLine();
+                line = bufferedReader.readLine()
             }
             val jsonResponse = JSONObject(readTextBuf.toString())
             it.resume(NetworkResult.Success(jsonResponse.toWeatherInfo()))
-        } catch (exception : MalformedURLException) {
+        } catch (exception: MalformedURLException) {
             Log.e(TAG, exception.message, exception)
             it.resume(NetworkResult.Failure("Malformed URL Exception", exception))
         } catch (exception: IOException) {
@@ -70,6 +68,5 @@ class APIConnectionImpl : APIConnection {
                 it.resume(NetworkResult.Failure("An Error occurred", ex))
             }
         }
-
     }
 }

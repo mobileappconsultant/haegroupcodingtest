@@ -1,6 +1,6 @@
-package com.haehome.di;
+package com.haehome.di
 
-import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 public interface DispatcherProvider {

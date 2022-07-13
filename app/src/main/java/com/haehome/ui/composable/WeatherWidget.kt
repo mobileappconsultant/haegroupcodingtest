@@ -1,10 +1,6 @@
 package com.haehome.ui.composable
 
-import android.widget.Space
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -20,22 +16,22 @@ import androidx.compose.ui.unit.sp
 import com.haehome.data.model.WeatherInfo
 
 @Composable
-fun WeatherWidget(weatherInfo: WeatherInfo, onRefresh : () -> Unit) {
+fun WeatherWidget(weatherInfo: WeatherInfo, onRefresh: () -> Unit) {
     DarkBackgroundCard {
         Column(
             Modifier
-                .fillMaxWidth()) {
+                .fillMaxWidth()
+        ) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround, verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "Weather Info", fontSize = 14.sp, color = Color.White)
-                Spacer( modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.weight(1f))
                 IconButton(onClick = onRefresh) {
                     Icon(imageVector = Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(24.dp), tint = Color.White)
-
                 }
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                 Box(modifier = Modifier.padding(16.dp)) {
-                    Text(text = "${weatherInfo.temp.toString()} \u2103", fontSize = 32.sp, color = Color.White)
+                    Text(text = "${weatherInfo.temp} \u2103", fontSize = 32.sp, color = Color.White)
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Column {
@@ -48,5 +44,4 @@ fun WeatherWidget(weatherInfo: WeatherInfo, onRefresh : () -> Unit) {
             Text(text = weatherInfo.description, fontSize = 16.sp, color = Color.White, textAlign = TextAlign.Center, modifier = Modifier.fillMaxWidth())
         }
     }
-
 }

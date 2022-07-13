@@ -21,15 +21,18 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        registerReceiver(object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val batteryPct: Float? = intent?.let { intent ->
-                    val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-                    val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-                    level * 100 / scale.toFloat()
+        registerReceiver(
+            object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    val batteryPct: Float? = intent?.let { intent ->
+                        val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+                        val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
+                        level * 100 / scale.toFloat()
+                    }
+                    batteryPercent = batteryPct
                 }
-                batteryPercent = batteryPct
-            }
-        }, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+            },
+            IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        )
     }
 }

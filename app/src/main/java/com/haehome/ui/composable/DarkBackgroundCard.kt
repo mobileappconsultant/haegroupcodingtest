@@ -19,7 +19,7 @@ fun DarkBackgroundCard(content: @Composable () -> Unit) {
         elevation = 0.dp,
         modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
     ) {
-        Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center){
+        Box(modifier = Modifier.padding(16.dp), contentAlignment = Alignment.Center) {
             content()
         }
     }

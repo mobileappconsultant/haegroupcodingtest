@@ -13,8 +13,7 @@ class PowerConnectionReceiver : BroadcastReceiver() {
         var batteryLevel by mutableStateOf(-1f)
     }
     override fun onReceive(context: Context?, intent: Intent?) {
-        if ( intent?.action == BatteryManager.ACTION_CHARGING || intent?.action == BatteryManager.ACTION_DISCHARGING){
-
+        if (intent?.action == BatteryManager.ACTION_CHARGING || intent?.action == BatteryManager.ACTION_DISCHARGING) {
         }
         val batteryPct: Float? = intent?.let { intent ->
             val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
@@ -23,5 +22,4 @@ class PowerConnectionReceiver : BroadcastReceiver() {
         }
         batteryLevel = batteryPct ?: -1f
     }
-
 }

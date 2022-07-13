@@ -1,6 +1,5 @@
 package com.haehome.ui.composable
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -13,21 +12,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.haehome.App
-import com.haehome.PowerConnectionReceiver
-import com.haehome.data.model.WeatherInfo
-import com.haehome.ui.composable.BatteryLevel
 import com.haehome.ui.viewModel.MainViewModel
 
 @Composable
-fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToAppDrawer : () -> Unit) {
+fun HomeScreen(batteryLevel: Float, mainViewModel: MainViewModel, navigateToAppDrawer: () -> Unit) {
     val state by mainViewModel.weatherState.collectAsState()
     HomeBackground {
         Column {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)){
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+            ) {
                 Column(horizontalAlignment = Alignment.Start) {
                     Spacer(modifier = Modifier.height(32.dp))
                     Row(verticalAlignment = Alignment.Top) {
@@ -36,7 +32,7 @@ fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToApp
                         Clock()
                     }
                     Spacer(modifier = Modifier.height(32.dp))
-                    when(state){
+                    when (state) {
                         is MainViewModel.WeatherState.Failure -> {
                             ErrorView((state as MainViewModel.WeatherState.Failure).message) {
                                 mainViewModel.getWeatherDetails()
@@ -53,7 +49,6 @@ fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToApp
                             }
                         }
                         null -> {
-
                         }
                     }
                 }
@@ -63,7 +58,8 @@ fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToApp
                     navigateToAppDrawer()
                 }) {
                     Card(backgroundColor = Color.White, shape = CircleShape) {
-                        Icon(Icons.Filled.List, contentDescription = "",
+                        Icon(
+                            Icons.Filled.List, contentDescription = "",
                             modifier = Modifier
                                 .size(48.dp)
                                 .padding(4.dp),
@@ -73,7 +69,6 @@ fun HomeScreen(batteryLevel : Float, mainViewModel: MainViewModel, navigateToApp
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
-
         }
     }
 }

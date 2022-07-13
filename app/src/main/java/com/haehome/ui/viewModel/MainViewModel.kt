@@ -6,7 +6,6 @@ import com.haehome.data.model.WeatherInfo
 import com.haehome.data.network.NetworkResult
 import com.haehome.data.repository.WeatherRepository
 import com.haehome.di.DispatcherProvider
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -22,9 +21,9 @@ class MainViewModel(private val weatherRepository: WeatherRepository, private va
     }
     fun getWeatherDetails() {
         viewModelScope.launch() {
-            withContext(dispatcherProvider.io){
+            withContext(dispatcherProvider.io) {
                 _weatherState.value = WeatherState.Loading
-                when(val result = weatherRepository.getRandomWeatherDetails()){
+                when (val result = weatherRepository.getRandomWeatherDetails()) {
                     is NetworkResult.Failure -> {
                         _weatherState.value = WeatherState.Failure(result.message)
                     }

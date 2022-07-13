@@ -7,7 +7,7 @@ import com.haehome.data.repository.WeatherRepository
 class FakeWeatherRepository : WeatherRepository {
     var simulateFailure = false
     override suspend fun getRandomWeatherDetails(): NetworkResult<WeatherInfo> {
-        if(simulateFailure){
+        if (simulateFailure) {
             return NetworkResult.Failure("An error occurred")
         } else {
             return NetworkResult.Success(

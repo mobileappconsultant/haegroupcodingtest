@@ -26,16 +26,18 @@ fun AppIcon(installedApp: ApplicationInfo) {
     val icon: Drawable = context.packageManager.getApplicationIcon(installedApp.packageName)
     val name: String = context.packageManager.getApplicationLabel(installedApp).toString()
     Box(contentAlignment = Alignment.Center) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 8.dp)){
-            Card (shape = CircleShape, backgroundColor = Color.White, modifier = Modifier.size(56.dp).clickable {
-                context.openApp(installedApp.packageName)
-            }){
-                Image(bitmap = icon.toBitmap().asImageBitmap(), contentDescription = "", modifier = Modifier.size(48.dp) )
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.padding(horizontal = 8.dp)) {
+            Card(
+                shape = CircleShape, backgroundColor = Color.White,
+                modifier = Modifier.size(56.dp).clickable {
+                    context.openApp(installedApp.packageName)
+                }
+            ) {
+                Image(bitmap = icon.toBitmap().asImageBitmap(), contentDescription = "", modifier = Modifier.size(48.dp))
             }
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = name, maxLines = 1, fontSize = 12.sp, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
             Spacer(modifier = Modifier.height(48.dp))
         }
     }
-
 }
