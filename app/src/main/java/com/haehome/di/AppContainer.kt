@@ -9,5 +9,5 @@ class AppContainer {
     private val apiConnection : APIConnection = APIConnectionImpl()
     private val weatherRepository :WeatherRepository = WeatherRepositoryImpl(api = apiConnection)
     private val dispatcherProvider = DispatcherProviderImpl()
-    val viewModelFactory = MainViewModelFactory(weatherRepository, dispatcherProvider)
+    val viewModelFactory =      MainViewModelFactory(weatherRepository, dispatcherProvider)
 }
